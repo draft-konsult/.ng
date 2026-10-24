@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Draft Konsult – Your Legal Document Partner</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--navy:#0f1b3d;--gold:#d4af5f;--bg:#f6f3ea;--card:#fff;--text:#1a2238;--muted:#5b6478;--line:#d9d4c3;--field:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1330;--card:#13214a;--text:#f2efe4;--muted:#aab2c8;--line:#2c3a66;--field:#0f1b3d}}
+:root[data-theme="dark"]{--bg:#0a1330;--card:#13214a;--text:#f2efe4;--muted:#aab2c8;--line:#2c3a66;--field:#0f1b3d}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--navy);color:#fff;text-align:center;padding:28px 16px 24px;border-bottom:4px solid var(--gold)}
+.logo{width:64px;height:64px;border-radius:50%;background:#fff;margin:0 auto 10px;display:grid;place-items:center;font-size:30px;border:3px solid var(--gold)}
+h1{margin:0;font:700 2rem Georgia,"Times New Roman",serif;letter-spacing:.04em}
+h1 span{color:var(--gold)}
+header p{margin:4px 0 0;color:#cfd6ea}
+main{max-width:720px;margin:0 auto;padding:20px 16px 40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:18px}
+h2{font:700 1.25rem Georgia,serif;margin:0 0 12px;color:var(--text)}
+h2::after{content:"";display:block;width:44px;height:3px;background:var(--gold);margin-top:6px}
+label{display:block;font-weight:600;margin:14px 0 4px;font-size:.93rem}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--field);color:var(--text);font:inherit}
+textarea{min-height:70px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+.btn{display:inline-block;background:var(--gold);color:#0f1b3d;font-weight:700;border:0;border-radius:10px;padding:13px 20px;font-size:1rem;cursor:pointer;text-decoration:none;text-align:center}
+.btn.alt{background:transparent;color:var(--text);border:2px solid var(--gold)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.svc{border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;background:var(--card)}
+.svc h3{margin:0;font:700 1.02rem Georgia,serif}
+.svc p{margin:0;font-size:.9rem;color:var(--muted);flex:1}
+.price{color:var(--text);font-weight:700}
+.price i{font-style:normal;background:var(--gold);color:#0f1b3d;border-radius:6px;padding:2px 8px}
+.svc .btn{padding:10px 14px;font-size:.95rem}
+#sheet{position:fixed;inset:0;z-index:40;background:rgba(5,10,30,.75);display:none;align-items:flex-end;justify-content:center}
+#sheet .in{background:var(--card);width:100%;max-width:560px;border-radius:16px 16px 0 0;padding:18px 18px max(18px,env(safe-area-inset-bottom,0px));max-height:92%;overflow-y:auto;border-top:5px solid var(--gold)}
+.note{font-size:.88rem;color:var(--muted)}
+.err{color:#c0392b;font-size:.88rem;margin-top:6px;min-height:1em}
+.hide{display:none}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 16px 30px}
+footer a{color:var(--text)}
+#gate{position:fixed;inset:0;z-index:50;background:rgba(5,10,30,.88);display:flex;align-items:center;justify-content:center;padding:max(12px,env(safe-area-inset-top,0px)) 12px max(12px,env(safe-area-inset-bottom,0px))}
+#gate .box{background:var(--card);border-radius:14px;max-width:640px;width:100%;max-height:100%;display:flex;flex-direction:column;border-top:5px solid var(--gold)}
+#gate .box>h2{padding:16px 18px 0;margin:0}
+#gate .scroll{overflow-y:auto;padding:0 18px;font-size:.92rem;flex:1}
+#gate .scroll h3{font-size:1rem;margin:16px 0 4px}
+#gate .foot{padding:14px 18px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gt">
+ <div class="box">
+  <h2 id="gt">Privacy Policy &amp; Terms of Use</h2>
+  <div class="scroll">
+   <p class="note">Please read this before continuing. Effective: October 2026.</p>
+   <h3>1. Who we are</h3>
+   <p>Draft Konsult (“we”, “us”) provides legal and business documentation services in Nigeria, including affidavit drafting, business and company registration, TIN generation and company searches.</p>
+   <h3>2. Information we collect</h3>
+   <p>Only what you type into this site: your name, phone number, email, the service you want, details needed to prepare your document, and, if you send it, proof of payment. We do not collect card numbers, PINs, passwords or BVN, and you should never send them to us.</p>
+   <h3>3. How we use it</h3>
+   <p>To prepare and deliver your documents, confirm your payment, contact you about your request, and meet legal obligations. We rely on your consent and on the need to perform the service you request, in line with the Nigeria Data Protection Act 2023 (NDPA).</p>
+   <h3>4. How your information reaches us</h3>
+   <p>This site does not keep your data on a server. When you choose a service, a message is prepared on your device and you choose to send it to us by WhatsApp or email. Those services are run by third parties, and their own privacy terms apply to your message.</p>
+   <h3>5. Sharing</h3>
+   <p>We share information only where needed to do the job you asked for, for example with the Corporate Affairs Commission, tax authorities, courts, commissioners for oaths, or newspapers for publication, or where the law requires. We do not sell your information.</p>
+   <h3>6. Keeping it safe and how long</h3>
+   <p>We take reasonable steps to protect your information, restrict access to it and keep it only as long as needed for your service, our records and legal requirements.</p>
+   <h3>7. Your rights</h3>
+   <p>You may ask to access, correct or delete your information, withdraw consent, or object to its use, by contacting draftkonsult@gmail.com. You may also complain to the Nigeria Data Protection Commission.</p>
+   <h3>8. Payments</h3>
+   <p>Our bank details are shared privately with you after you contact us, never on this site. Work begins once we confirm your payment. Confirm any account details with us by phone or WhatsApp and do not pay any other account.</p>
+   <h3>9. Accuracy of your information</h3>
+   <p>You confirm the information you give is true and complete. We are not responsible for delays, rejections or errors caused by wrong or incomplete information, or by decisions of government agencies and other third parties.</p>
+   <h3>10. No liability for breaches outside our fault</h3>
+   <p>To the fullest extent permitted by law, Draft Konsult is not liable for any loss, damage, unauthorised access, disclosure or breach of your data that is not caused by our own negligence or wilful default. This includes breaches or outages on WhatsApp, email providers, banks, internet or network providers, your own device or account, cyberattacks despite our reasonable security measures, and information you choose to share with others. Nothing here excludes liability that cannot lawfully be excluded.</p>
+   <h3>11. Changes</h3>
+   <p>We may update this policy. Continued use of the site means you accept the updated version.</p>
+  </div>
+  <div class="foot">
+   <p class="note" style="margin:0 0 10px">By clicking “Agree and Continue” you confirm you have read and accept this Privacy Policy and these Terms.</p>
+   <button class="btn" id="agree" style="width:100%">Agree and Continue</button>
+  </div>
+ </div>
+</div>
+
+<header>
+ <div class="logo" aria-hidden="true">📖</div>
+ <h1><span>DRAFT</span> KONSULT</h1>
+ <p>Legal &amp; Business Documentation Services</p>
+ <p style="font-size:.85rem">Your Legal Document Partner</p>
+</header>
+
+<main>
+ <section class="card">
+  <h2>Business &amp; Registration Services</h2>
+  <div class="grid" id="biz"></div>
+ </section>
+ <section class="card">
+  <h2>Affidavits — ₦10,000 each</h2>
+  <p class="note" style="margin-top:0">Professionally drafted affidavits. Tap “Request” on the one you need and we will continue on WhatsApp or email.</p>
+  <div class="grid" id="aff"></div>
+ </section>
+ <section class="card">
+  <h2>How it works</h2>
+  <p style="margin:0">1. Choose a service. 2. Send us the prepared message on WhatsApp or email. 3. We reply with the next steps and payment details privately. 4. We start once payment is confirmed.</p>
+ </section>
+</main>
+
+<div id="sheet"><div class="in">
+ <h2 id="sT">Request</h2>
+ <p id="sP" class="price" style="margin:0"></p>
+ <label for="n">Your full name</label><input id="n" autocomplete="name">
+ <label for="p">Phone / WhatsApp (optional)</label><input id="p" type="tel" autocomplete="tel">
+ <label for="d">Short note (optional)</label><textarea id="d" placeholder="e.g. names, dates or business name involved"></textarea>
+ <div class="actions">
+  <a class="btn" id="wa" target="_blank" rel="noopener">Continue on WhatsApp</a>
+  <a class="btn alt" id="mail" target="_blank" rel="noopener">Continue by Email</a>
+  <button class="btn alt" id="copy" type="button">Copy message</button>
+  <button class="btn alt" id="close" type="button">Cancel</button>
+ </div>
+ <p class="note">You can send the message with or without filling the fields above. Payment details are shared with you privately. If email does not open, copy the message and send it to draftkonsult@gmail.com.</p>
+</div></div>
+
+<footer>
+ 📞 / WhatsApp +234 902 395 0987 · ✉ <a href="mailto:draftkonsult@gmail.com">draftkonsult@gmail.com</a><br>
+ Instagram @DraftKonsult · Facebook DraftKonsult · LinkedIn DraftKonsult<br>
+ <a href="#" id="reopen">Privacy Policy &amp; Terms</a>
+</footer>
+
+<script>
+var WHATSAPP="2349023950987",EMAIL="draftkonsult@gmail.com";
+var BIZ=[
+["Business Name Registration","₦50,000","Register your business name with the CAC so you can operate, open a business account and win contracts."],
+["Company Registration","From ₦100,000+","Incorporate a limited company. Final price depends on your share capital."],
+["NGO / Incorporated Trustees (IT) Registration","From ₦130,000+","Register your NGO, church, association or foundation as Incorporated Trustees."],
+["Company Search","₦15,000","Check company name availability and verify a company’s registration details."],
+["TIN Generation","Contact us for price","Get a Tax Identification Number for yourself or your business, with guidance from start to finish."]];
+var AFF=[
+["Affidavit of Good Conduct","A sworn statement of your good character and clean record. Needed for jobs, school admissions and some applications."],
+["Affidavit of Means","Declares your income or financial capacity. Often required for visa applications or when someone sponsors you."],
+["Affidavit of Date of Birth Correction","Fixes a wrong date of birth across your records. Useful for school, passport, NIN and employment documents."],
+["Affidavit of Age Declaration","States your age when you have no birth certificate. Used for pension, employment and school records."],
+["Affidavit of Declaration of Marriage","Declares that you are lawfully married. Used for spouse applications, name changes and official records."],
+["Affidavit of Next of Kin","Names the person who should be contacted and act for you. Required by banks, employers and insurers."],
+["Affidavit of Marital Separation","Declares that spouses are living apart. Used for official records, visa matters and family arrangements."],
+["Affidavit of Change of Ownership (Vehicle)","Records the transfer of a vehicle from seller to buyer. Needed to update vehicle registration papers."],
+["Affidavit of Change of Plate Number","Confirms a new or changed plate number for your vehicle so your records match."],
+["Affidavit of Loss","Declares that a document or item is lost. Required to get replacements such as IDs, certificates or ATM cards."],
+["Affidavit of Change of Signature","States that you now use a different signature. Accepted by banks and other institutions to update records."],
+["Other Affidavit (not listed)","Need a different affidavit? Tell us what you need and we will draft it."]];
+var $=function(i){return document.getElementById(i)};
+function card(t,price,desc){var d=document.createElement("div");d.className="svc";
+ var h=document.createElement("h3");h.textContent=t;var p=document.createElement("p");p.textContent=desc;
+ var pr=document.createElement("div");pr.className="price";var i=document.createElement("i");i.textContent=price;pr.appendChild(i);
+ var b=document.createElement("button");b.className="btn";b.textContent="Request";b.onclick=function(){openSheet(t,price)};
+ d.appendChild(h);d.appendChild(p);d.appendChild(pr);d.appendChild(b);return d}
+BIZ.forEach(function(x){$("biz").appendChild(card(x[0],x[1],x[2]))});
+AFF.forEach(function(x){$("aff").appendChild(card(x[0],"₦10,000",x[1]))});
+
+var cur=null;
+function build(){
+ var n=$("n").value.trim(),p=$("p").value.trim(),d=$("d").value.trim();
+ var t="Hello Draft Konsult, I would like to request: "+cur.t+" ("+cur.p+")."
+  +(n?"\nName: "+n:"")+(p?"\nPhone: "+p:"")+(d?"\nNote: "+d:"")
+  +"\n\nPlease send me the next steps and payment details. I have read and agreed to the Privacy Policy & Terms.";
+ window.MSG=t;$("wa").href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(t);
+ $("mail").href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Service request: "+cur.t+(n?" – "+n:""))+"&body="+encodeURIComponent(t);
+}
+function openSheet(t,p){cur={t:t,p:p};$("sT").textContent=t;$("sP").textContent=p;build();$("sheet").style.display="flex"}
+["n","p","d"].forEach(function(i){$(i).oninput=build});
+$("close").onclick=function(){$("sheet").style.display="none"};
+$("copy").onclick=function(){var b=$("copy"),x="To: "+EMAIL+"\n\n"+window.MSG;try{navigator.clipboard.writeText(x).then(function(){b.textContent="Copied ✓"},function(){b.textContent="Copy not allowed"})}catch(e){b.textContent="Copy not allowed"}};
+$("sheet").onclick=function(e){if(e.target===$("sheet"))$("sheet").style.display="none"};
+
+function gateShow(show){$("gate").style.display=show?"flex":"none";document.body.style.overflow=show?"hidden":""}
+var agreed=false;try{agreed=sessionStorage.getItem("dk_agreed")==="1"}catch(e){}
+gateShow(!agreed);
+$("agree").onclick=function(){try{sessionStorage.setItem("dk_agreed","1")}catch(e){};gateShow(false);window.scrollTo(0,0)};
+$("reopen").onclick=function(e){e.preventDefault();gateShow(true)};
+</script>
+</body>
+</html>
